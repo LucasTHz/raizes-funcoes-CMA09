@@ -1,5 +1,7 @@
 mod lib;
 use std::io;
+#[macro_use] extern crate prettytable;
+use prettytable::{Table, Row, Cell};
 
 // A função utilizada é f(x) = (x/2)² - sin x
 // Calculo realizado através do método da bissecção
@@ -29,6 +31,7 @@ fn fxk(xk: f32) -> f32 {
 }
 
 fn main() {
+    let mut table = Table::new();
     println!("Digite o valor de a");
     let mut a = String::new();
 
@@ -47,10 +50,14 @@ fn main() {
     let tolerancia: f32 = 0.0001;
     // lib::false_position::ft(); Importar um modulo com funções
 
+    table.add_row(row!["i", "a", "b", "xk", "f(xk)", "f(a)", "f(b)"]);
+    table.printstd();
     loop {
-        println!("{} interação", i);
-        println!("a = {}", a);
-        println!("b = {}", b);
+
+        // println!("{} interação", i);
+        // println!("a = {}", a);
+        // println!("b = {}", b);
+        table.add_row(row!["i", "a", "b", "xk", "f(xk)", "f(a)", "f(b)"]);
         let mut raiz = xk(a, b);
         let mut fa = fa(a);
         let mut fb = fb(b);
