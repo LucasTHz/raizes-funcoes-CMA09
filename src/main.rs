@@ -9,18 +9,34 @@ fn main() {
     let mut a = String::new();
 
     io::stdin().read_line(&mut a).expect("Falha ao ler entrada");
+    let mut a: f32 = a.trim().parse().expect("Por favor, digite um número!");
 
     println!("Digite o valor de b");
     let mut b = String::new();
 
     io::stdin().read_line(&mut b).expect("Falha ao ler entrada");
-
-    let mut a: f32 = a.trim().parse().expect("Por favor, digite um número!");
-
     let mut b: f32 = b.trim().parse().expect("Por favor, digite um número!");
 
-    let mut i: f32 = 1.0;
-    let tolerancia: f32 = 0.0001;
+    println!("Digite o valor de parada");
+    let mut parada: String = String::new();
+
+    io::stdin()
+        .read_line(&mut parada)
+        .expect("Falha ao ler entrada");
+    let mut parada: f32 = parada.trim().parse().expect("Por favor, digite um número!");
+
+    println!("Digite o valor de tolerancia");
+    let mut tolerancia: String = String::new();
+
+    io::stdin()
+        .read_line(&mut tolerancia)
+        .expect("Falha ao ler entrada");
+    let tolerancia: f32 = tolerancia
+        .trim()
+        .parse()
+        .expect("Por favor, digite um número!");
+
+    let mut parada2: f32 = parada;
     let mut table = Table::new();
     let mut table1 = Table::new();
 
@@ -42,15 +58,14 @@ fn main() {
             a = raiz;
         }
 
-        i += 1.0;
+        parada -= 1.0;
 
-        if i >= 10.0 || f32::abs(fxk) < tolerancia {
+        if parada == 0.0 || f32::abs(fxk) < tolerancia {
             table.printstd();
             break;
         }
     }
 
-    i = 1.0;
     println!("\n Metodo da Falsa posicao");
     table1.add_row(row!["a", "b", "xk", "f(xk)", "f(a)", "f(b)"]);
     loop {
@@ -74,9 +89,9 @@ fn main() {
             a_falsa_position = raiz_falsa;
         }
 
-        i += 1.0;
+        parada2 -= 1.0;
 
-        if i >= 10.0 || f32::abs(fxk) < tolerancia {
+        if parada2 >= 10.0 || f32::abs(fxk) < tolerancia {
             table1.printstd();
             break;
         }
